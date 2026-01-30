@@ -1,3 +1,4 @@
 ﻿<Solution>
-  <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="Demo.FPCharacter.csproj" />
+  <Project Path="CIDemo.Input.csproj" />
 </Solution>

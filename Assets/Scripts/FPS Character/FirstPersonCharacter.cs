@@ -1,56 +1,59 @@
 using UnityEngine;
+using CIDemo.Input;
 
-public class FirstPersonCharacter : MonoBehaviour
+namespace CIDemo.FPCharacter
 {
-    [Header("References")]
-    [SerializeField] private MovementController movementController;
-    [SerializeField] private CameraController cameraController;
-    private IPlayerInput playerInput;
-    private bool initialized;
-    
-    private void Awake()
+    public class FirstPersonCharacter : MonoBehaviour
     {
-        // If components don't exist, try to find them on this GameObject
-        if (movementController == null)
+        [Header("References")]
+        [SerializeField] private MovementController movementController;
+        [SerializeField] private CameraController cameraController;
+        private IPlayerInput playerInput;
+        private bool initialized;
+
+        private void Awake()
         {
-            movementController = GetComponent<MovementController>();
-        }
-        
-        if (cameraController == null)
-        {
-            cameraController = GetComponentInChildren<CameraController>();
-        }
-        
-        // If still null, log warning
-        if (movementController == null)
-        {
-            Debug.LogWarning("MovementController not found. Add MovementController component to this GameObject.");
-            return;
-        }
-        
-        if (cameraController == null)
-        {
-            Debug.LogWarning("CameraController not found. Add CameraController component to a child GameObject.");
-            return;
+            // If components don't exist, try to find them on this GameObject
+            if (movementController == null)
+            {
+                movementController = GetComponent<MovementController>();
+            }
+
+            if (cameraController == null)
+            {
+                cameraController = GetComponentInChildren<CameraController>();
+            }
+
+            // If still null, log warning
+            if (movementController == null)
+            {
+                Debug.LogWarning("MovementController not found. Add MovementController component to this GameObject.");
+                return;
+            }
+
+            if (cameraController == null)
+            {
+                Debug.LogWarning("CameraController not found. Add CameraController component to a child GameObject.");
+                return;
+            }
+
+            initialized = true;
         }
 
-        initialized = true;
-    }
+        private void Start()
+        {
+            if (!initialized) { return; }
 
-    private void Start()
-    {
-        if(!initialized) { return; }
+            playerInput = GetComponent<StandaloneInputController>();
+            movementController.Init(playerInput);
+            cameraController.Init(playerInput);
+        }
 
-        playerInput = GetComponent<InputController>();
-        movementController.Init(playerInput);
-        cameraController.Init(playerInput);
-    }
 
-    
-    private void Update()
-    {
-        cameraController.Tick();
-        movementController.Tick();
+        private void Update()
+        {
+            cameraController.Tick();
+            movementController.Tick();
+        }
     }
 }
-

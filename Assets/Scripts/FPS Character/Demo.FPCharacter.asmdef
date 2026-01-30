@@ -1,0 +1,17 @@
+{
+    "name": "Demo.FPCharacter",
+    "rootNamespace": "CIDemo",
+    "references": [
+        "GUID:afd51df624764cc44ae5f47db9e31c08",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
